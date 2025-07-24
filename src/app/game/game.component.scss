@@ -22,13 +22,18 @@
     transition: all 180ms ease-in-out;
 
     &:hover {
-        cursor: pointer;
+        cursor: grab;
         transform: scale(1.2) translateY(-15px);
     }
 }
 
 .pick-card {
-    animation: pick-card-animation 1.2s ease-in-out;
+    animation: pick-card-animation 1s ease-in-out;
+    transform: scale(1.1) translateX(120px) translateY(-280px) rotate(20deg);
+}
+
+.played-card{
+    right: 20px;
     transform: scale(1.1) translateX(120px) translateY(-280px) rotate(20deg);
 }
 
