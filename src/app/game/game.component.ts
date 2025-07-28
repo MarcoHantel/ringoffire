@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Game } from 'src/models/game';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+
 
 @Component({
   selector: 'app-game',
@@ -12,6 +15,10 @@ export class GameComponent {
   pickCardAnimation = false;
   currentCard: string | any = '';
   game: Game = new Game;
+
+  constructor(public dialog: MatDialog) {
+
+  }
 
   ngOnInit(): void {
     this.newGame();
@@ -33,5 +40,13 @@ export class GameComponent {
     }
   }
 
-}
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+
+  }
+
+}
