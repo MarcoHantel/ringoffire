@@ -4,12 +4,8 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
-
   { path: '', component: StartScreenComponent},
-  { path: 'game', component: GameComponent}
-
-  
-
+  { path: 'game/:id', component: GameComponent} // Route bekommt eine dynamische ID zugewiesen :id
 ];
 
 @NgModule({

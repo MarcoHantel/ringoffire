@@ -11,7 +11,7 @@ export class PlayerComponent {
 @Input() playerActive: boolean | undefined = false;
 
 ngOnInit(){
-  console.log(this.playerActive, 'Hallo');
+  // console.log(this.playerActive, 'Hallo');
 }
 
 }

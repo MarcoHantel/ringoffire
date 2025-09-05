@@ -1,29 +1,47 @@
-<app-player *ngFor="let player of game.players; let i = index;"
-    [ngStyle]="{'position': 'absolute', 'right': '0px', 'top.px': 100 + (i * 100)}" 
-    [name]="player"
-    [playerActive]="i == game.currendPlayer"></app-player>
+<div *ngIf="gameOver" class="game-over">
+    <img src="assets/img/game-over.png" alt="">
+</div>
 
-<div class="game-table">
 
+
+<div *ngIf="!gameOver" class="game-table">
+
+<img class="preloadImage" src="assets/img/cards/{{ game.stack[game.stack.length -1] }}.png"> <!-- Karten vorladen -->
+
+    <app-player class="hide-mobile" *ngFor="let player of game.players; let i = index;"
+        [ngStyle]="{'position': 'absolute', 'right': '0px', 'top.px': 100 + (i * 100), 'z-index': '1'}" [name]="player"
+        [playerActive]="i == game.currendPlayer"></app-player>
+
+    <div class="scroll-container">
+        <!-- [ngStyle]="{'position': 'absolute', 'left.px': 10 + (i * 75),'top.px':'0', 'z-index': '1', 'margin-left': '20px'}" -->
+        <app-player-mobile class="hide-desktop" *ngFor="let player of game.players; let i = index;" [name]="player"
+            [playerActive]="i == game.currendPlayer"></app-player-mobile>
+    </div>
+
+
+    <!-- bei alle src vornde wieder ein / ergänzen, wenn local verwendet werden soll -->
     <div class="stack-cards">
         <!-- Card stack -->
         <img [ngStyle]="{'right.px': i * 5}" *ngFor="let card of [0,1,2,3]; let i = index;"
-            src="/assets/img/cards/card_cover.png">
-        <img (click)="takeCard()" class="top-card" style="right: 20px;" src="/assets/img/cards/card_cover.png">
+            src="assets/img/cards/card_cover.png">
+        <img (click)="takeCard()" class="top-card" style="right: 20px;" src="assets/img/cards/card_cover.png">
 
         <!-- Stack for played cards -->
-        <img *ngFor="let card of game.playedCards" class="played-card" src="/assets/img/cards/{{ card }}.png">
+        <img *ngFor="let card of game.playedCards" class="played-card" src="assets/img/cards/{{ card }}.png">
+
+
 
         <!-- Current card (Animation) -->
-        <img (click)="takeCard()" *ngIf="pickCardAnimation" class="pick-card" style="right: 20px;"
-            src="/assets/img/cards/{{ currentCard }}.png">
+        <img (click)="takeCard()" *ngIf="game.pickCardAnimation" class="pick-card" style="right: 20px;"
+            src="assets/img/cards/{{ game.currentCard }}.png">
 
 
     </div>
+
+    <app-game-card [card]="game.currentCard" class="info-card"></app-game-card>
+
+    <button mat-fab color="primary" (click)="openDialog()" class="add-button">
+        <mat-icon>add</mat-icon>
+    </button>
+
 </div>
-
-<app-game-card [card]="currentCard" class="info-card"></app-game-card>
-
-<button mat-fab color="primary" (click)="openDialog()" class="add-button">
-    <mat-icon>add</mat-icon>
-</button>
